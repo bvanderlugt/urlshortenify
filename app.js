@@ -1,5 +1,3 @@
-// TODO change out console.log for debug statements
-
 var express = require('express');
 var mongodb = require('mongodb');
 var handler = require('./requestHandlers');
@@ -15,19 +13,20 @@ var app = express();
 app.set('views', path.join(__dirname, 'public'));
 app.set('view engine', 'jade');
 
-MongoClient.connect(url, function (err, db) {
-  if (err) {
-    console.log('Unable to connect to the mongoDB server. Error:', err);
-  } else {
-    //HURRAY!! We are connected. :)
-    console.log('Connection established to', url);
-
-    // do some work here with the database.
-
-    //Close connection
-    db.close();
-  }
-});
+//DEBUGGING
+// MongoClient.connect(url, function (err, db) {
+//   if (err) {
+//     console.log('Unable to connect to the mongoDB server. Error:', err);
+//   } else {
+//     //HURRAY!! We are connected. :)
+//     console.log('Connection established to', url);
+//
+//     // do some work here with the database.
+//
+//     //Close connection
+//     db.close();
+//   }
+// });
 
 app.get('/', function(req, res) {
   res.render('index');
@@ -59,9 +58,20 @@ app.get('/new/*', function(req, res) {
   }
 });
 
-app.get('/*', function(req, res) {
+app.get('/:shortUrl', function(req, res) {
   //retrieve a url and redirect
-  res.send(req.params[0]);
+  MongoClient.connect(url, function(err, db) {
+    assert.equal(null, err);
+    handler.getFullUrl(db, req, function(data) {
+      console.log('A shortUrl request to the database returned: ' +
+        JSON.stringify(data));
+      if (data[0]) {
+        res.redirect(data[0].reqUrl);
+      } else {
+        res.send('url not found')
+      }
+    });
+  });
 });
 
 app.listen(3000, function(){

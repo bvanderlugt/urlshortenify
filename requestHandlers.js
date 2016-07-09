@@ -29,6 +29,16 @@ function getDocuments(db, callback) {
     });
 }
 
+function getFullUrl(db, req, callback) {
+  console.log("looking for" + JSON.stringify(req.params.shortUrl) + "in the db");
+  var cursor = db.collection('urls').find( {shortUrl: req.params.shortUrl} )
+  cursor.toArray(function(err, doc) {
+    if (err) throw err;
+    callback(doc);
+  })
+}
+
 exports.validate = validate;
 exports.insertDocument = insertDocument;
 exports.getDocuments = getDocuments;
+exports.getFullUrl = getFullUrl;
