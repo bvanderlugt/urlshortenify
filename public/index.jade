@@ -2,5 +2,23 @@ doctype html
 html(lang="en")
   head
     title= urlshortenify
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
+    link(rel='script', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
   body
-    h1 URL shortenify
+    div.container
+      h1 URL Shortener Microservice: urlshortenify
+      h3 Example creation usage:
+        pre #{host}/new/https://google.com
+        or
+        pre #{host}/new/http://google.com
+      h3 Example creation output:
+        pre {"reqUrl":"https://google.com","shortUrl":"localhost:3000/Byxrg_C8"}
+
+      h3 Use the shortUrl to redirect to the original URL:
+        pre #{host}/Byxrg_C8
+      h3 Will take you to:
+        pre https://google.com
+
+  footer
+    div.container
+      p: #[created by] #[a(href="https://codepen.io/bvanderlugt/full/zrBpxb/") Blair Vanderlugt]

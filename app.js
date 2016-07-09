@@ -13,23 +13,9 @@ var app = express();
 app.set('views', path.join(__dirname, 'public'));
 app.set('view engine', 'jade');
 
-//DEBUGGING
-// MongoClient.connect(url, function (err, db) {
-//   if (err) {
-//     console.log('Unable to connect to the mongoDB server. Error:', err);
-//   } else {
-//     //HURRAY!! We are connected. :)
-//     console.log('Connection established to', url);
-//
-//     // do some work here with the database.
-//
-//     //Close connection
-//     db.close();
-//   }
-// });
-
 app.get('/', function(req, res) {
-  res.render('index');
+  console.log('host name is ' + req.get('host'))
+  res.render('index', { host: req.get('host')} );
 });
 
 //TODO refactor so that this route exits early when non-valid url is used.
