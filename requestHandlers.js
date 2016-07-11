@@ -2,9 +2,9 @@
 var assert = require('assert');
 var shortid = require('shortid');
 
-function validate(req) {
+function validate(input) {
   var re = /(http:\/\/|https:\/\/)(..)+/g;
-  return re.test(req.params[0]);
+  return re.test(input);
 }
 
 function insertDocument(db, req, callback) {

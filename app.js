@@ -22,7 +22,8 @@ app.get('/', function(req, res) {
 app.get('/new/*', function(req, res) {
 
   //req url
-  if (handler.validate(req)) {
+  var inputUrl = req.params[0];
+  if (handler.validate(inputUrl)) {
     console.log('request contains valid url: ' + req.params[0]);
 
     // make insert

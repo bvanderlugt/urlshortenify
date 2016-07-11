@@ -9,6 +9,7 @@
   "author": "blair",
   "license": "ISC",
   "dependencies": {
+    "chai": "^3.5.0",
     "jade": "^1.11.0",
     "shortid": "^2.2.6"
   },
