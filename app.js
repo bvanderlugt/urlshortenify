@@ -58,6 +58,6 @@ app.get("/:shortUrl", function(req, res) {
   });
 });
 
-app.listen(8080, function(){
+app.listen(process.env.PORT || 8080, function(){
   console.log("urlshortenify app listening on port 8080!");
 });
