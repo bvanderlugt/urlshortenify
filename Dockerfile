@@ -1,13 +1,12 @@
-FROM node:latest
+FROM heroku/nodejs
 
-RUN mkdir /app
-WORKDIR /app
+WORKDIR /app/user
 
-COPY package.json /app
+COPY package.json /app/user
 RUN npm install
 
-COPY . /app
+COPY . /app/user
 
-EXPOSE 3000
+EXPOSE 8080
 
 CMD ["npm", "start"]
