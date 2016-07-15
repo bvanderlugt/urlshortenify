@@ -6,7 +6,7 @@ var path = require("path");
 
 var MongoClient = mongodb.MongoClient;
 
-var url = "mongodb://172.18.0.1:27017/dev";
+var url = process.env.MONGOURI;
 
 var app = express();
 
